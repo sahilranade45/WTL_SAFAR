@@ -1,0 +1,26 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# SAFAR Project — Git Ignore Rules
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Secrets — NEVER commit API keys or environment files ─────────────────────
+backend/.env
+
+# ── Python virtual environment ────────────────────────────────────────────────
+backend/.venv/
+
+# ── Python byte-code cache ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+
+# ── OS / editor noise ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# ── Node (for the react-app sub-folder) ──────────────────────────────────────
+node_modules/
+dist/
+.env.local
