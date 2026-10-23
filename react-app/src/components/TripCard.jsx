@@ -1,69 +1,25 @@
-import React from 'react'
+// TripCard.jsx - shows ONE trip. The parent (Dashboard) gives it data through "props".
 
-function TripCard({ trip, onRemoveTrip }) {
-  const getStatusClass = (status) => {
-    switch (status) {
-      case 'Upcoming':
-        return 'status-upcoming'
-      case 'Completed':
-        return 'status-completed'
-      case 'Planning':
-        return 'status-planning'
-      default:
-        return 'status-default'
-    }
-  }
-
+// props: trip = the trip object to show, onRemove = a function to call when "Remove" is clicked
+function TripCard({ trip, onRemove }) {
   return (
-    <article className="destination-card trip-card" aria-label={`Trip to ${trip.destination}`}>
+    <article className="card">
       <div className="card-image">
-        <img
-          src={trip.image}
-          alt={trip.destination}
-          loading="lazy"
-        />
-        <span className={`status-tag ${getStatusClass(trip.status)}`}>
-          ● {trip.status}
-        </span>
-        <span className="card-tag">{trip.category}</span>
+        <img src={trip.image} alt={trip.destination} />
+        {/* The tag shows the trip status, e.g. Upcoming */}
+        <span className="card-tag">{trip.status}</span>
       </div>
 
       <div className="card-body">
-        <p className="card-location">{trip.state}</p>
-        <h3 className="card-title">{trip.destination}</h3>
+        <h3>{trip.destination}</h3>
+        <p>{trip.duration} · {trip.date}</p>
+        <p>{trip.description}</p>
+        <p className="budget">Budget: {trip.budget}</p>
 
-        <div className="trip-meta-row">
-          <span className="trip-duration">⏱️ {trip.duration}</span>
-          <span className="trip-dates">📅 {trip.date}</span>
-        </div>
-
-        <p className="card-description">{trip.description}</p>
-
-        <div className="trip-specs">
-          <div className="spec-item">
-            <span className="spec-label">Est. Budget</span>
-            <span className="spec-value">{trip.budget}</span>
-          </div>
-          <div className="spec-item">
-            <span className="spec-label">Travelers</span>
-            <span className="spec-value">{trip.travelers}</span>
-          </div>
-        </div>
-
-        <div className="card-footer">
-          <span className="card-footer-info">
-            Trip ID: <strong>{trip.id}</strong>
-          </span>
-
-          <button
-            type="button"
-            className="remove-btn"
-            onClick={() => onRemoveTrip(trip.id)}
-            title={`Remove ${trip.destination} from dashboard`}
-          >
-            Remove Trip
-          </button>
-        </div>
+        {/* onClick runs onRemove with this trip's id */}
+        <button className="remove-btn" onClick={() => onRemove(trip.id)}>
+          Remove trip
+        </button>
       </div>
     </article>
   )

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFAR - AI Travel Planner</title>
+
+    <!-- Fonts used by the site (Playfair Display for headings, DM Sans for text) -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- EXTERNAL CSS: the shared style.css file -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- INTERNAL CSS: a <style> tag inside this one page only -->
+    <style>
+        .destinations-heading {
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top navigation bar (same on every page) -->
+    <header class="navbar">
+        <a href="index.html" class="logo">SAFAR<span>.</span></a>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="explore.html">Explore</a>
+            <a href="planner.html">Plan a Trip</a>
+            <a href="http://localhost:5173" title="Run the React app first (see EXPLAIN.md)">Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Big picture at the top with the main heading and button -->
+        <section class="hero">
+            <h1>Plan less.<br><span>Travel more.</span></h1>
+            <p>
+                Tell SAFAR where you want to go and our AI (Google Gemini)
+                writes a day-by-day itinerary just for you.
+            </p>
+            <!-- onclick calls the startPlanning() function from script.js -->
+            <div>
+                <button class="btn" onclick="startPlanning()">Plan My Trip</button>
+            </div>
+        </section>
+
+        <!-- How it works: an ORDERED LIST (<ol>) with three steps -->
+        <section class="section" id="how-it-works">
+            <h2>From idea to itinerary in minutes</h2>
+            <ol class="steps">
+                <li><strong>Tell us about your trip.</strong> Choose a destination, dates, budget and interests.</li>
+                <li><strong>The AI plans it.</strong> Gemini writes morning, afternoon and evening activities for every day.</li>
+                <li><strong>Get your itinerary.</strong> Read your day-by-day plan and travel tips.</li>
+            </ol>
+        </section>
+
+        <!-- Three popular places. Each <img> has src, alt, width and height -->
+        <section class="section">
+            <h2 class="destinations-heading">Where will you go next?</h2>
+            <!-- INLINE CSS: the style="..." attribute below styles just this one paragraph -->
+            <p class="section-note" style="font-style: italic;">A few popular places. See all of them on the Explore page.</p>
+
+            <div class="card-grid">
+
+                <article class="card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=900&q=80"
+                             alt="Dal Lake in Kashmir" width="900" height="200">
+                        <span class="card-tag">Mountains</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Kashmir</h3>
+                        <p>Serene lakes, alpine valleys and Himalayan views.</p>
+                        <a class="card-link" href="planner.html?destination=Kashmir">Plan this trip &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=80"
+                             alt="A beach in Goa" width="900" height="200">
+                        <span class="card-tag">Beaches</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Goa</h3>
+                        <p>Golden beaches, coastal cafes and sunsets.</p>
+                        <a class="card-link" href="planner.html?destination=Goa">Plan this trip &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=900&q=80"
+                             alt="A palace in Jaipur" width="900" height="200">
+                        <span class="card-tag">Culture</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Jaipur</h3>
+                        <p>Royal palaces, colourful bazaars and rich heritage.</p>
+                        <a class="card-link" href="planner.html?destination=Jaipur">Plan this trip &rarr;</a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer with an UNORDERED LIST (<ul>) of links -->
+    <footer>
+        <ul>
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="planner.html">Plan a Trip</a></li>
+        </ul>
+        <p>&copy; 2026 SAFAR. Less scrolling. More exploring.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Destinations - SAFAR</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top navigation bar -->
+    <header class="navbar">
+        <a href="index.html" class="logo">SAFAR<span>.</span></a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="explore.html" class="active">Explore</a>
+            <a href="planner.html">Plan a Trip</a>
+            <a href="http://localhost:5173" title="Run the React app first (see EXPLAIN.md)">Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-title">
+            <h1>Explore Destinations</h1>
+        </section>
+
+        <section class="section">
+            <p class="section-note">Pick a category or search, then press "Plan this trip".</p>
+
+            <!-- Search box and category buttons (explore.js listens to these) -->
+            <div class="toolbar">
+                <input type="search" id="searchInput" placeholder="Search a place or state..." aria-label="Search destinations">
+                <div id="filters">
+                    <button class="filter active" data-category="All">All</button>
+                    <button class="filter" data-category="Mountains">Mountains</button>
+                    <button class="filter" data-category="Beaches">Beaches</button>
+                    <button class="filter" data-category="Culture">Culture</button>
+                    <button class="filter" data-category="Nature">Nature</button>
+                </div>
+            </div>
+
+            <!-- explore.js fills this grid with destination cards -->
+            <div class="card-grid" id="destinationGrid"></div>
+
+            <!-- Shown only when nothing matches -->
+            <p class="empty-message" id="emptyMessage" hidden>No destinations found. Try another search.</p>
+        </section>
+    </main>
+
+    <footer>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="planner.html">Plan a Trip</a></li>
+        </ul>
+        <p>&copy; 2026 SAFAR. Less scrolling. More exploring.</p>
+    </footer>
+
+    <script src="explore.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Itinerary - SAFAR</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top navigation bar -->
+    <header class="navbar">
+        <a href="index.html" class="logo">SAFAR<span>.</span></a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="explore.html">Explore</a>
+            <a href="planner.html">Plan a Trip</a>
+            <a href="http://localhost:5173" title="Run the React app first (see EXPLAIN.md)">Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-title">
+            <h1 id="pageHeading">Your Itinerary</h1>
+        </section>
+
+        <section class="section">
+            <!-- itinerary.js shows "Generating...", an error, or the finished plan inside this box -->
+            <div class="status-box" id="statusBox">Generating your itinerary with Gemini...</div>
+
+            <!-- itinerary.js fills this with the AI's answer -->
+            <div id="result"></div>
+
+            <p style="margin-top: 24px;">
+                <a class="btn btn-dark" href="planner.html">Plan Another Trip</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore</a></li>
+        </ul>
+        <p>&copy; 2026 SAFAR. Less scrolling. More exploring.</p>
+    </footer>
+
+    <script src="itinerary.js"></script>
+</body>
+</html>
