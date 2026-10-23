@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SAFAR — AI Travel Planner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            Safar
+        </div>
+
+        <nav class="nav-links">
+            <a href="explore.html">Explore</a>
+            <a href="pages/inspiration.html">Inspiration</a>
+            <a href="react-app/">My Dashboard</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#agents">AI Agents</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button class="login-btn">Log in</button>
+            <button class="primary-btn nav-cta" onclick="startPlanning()">
+                Plan a Trip
+            </button>
+        </div>
+
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    </header>
+
+
+    <!-- ================= MOBILE MENU ================= -->
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="explore.html" onclick="closeMenu()">Explore</a>
+        <a href="pages/inspiration.html" onclick="closeMenu()">Inspiration</a>
+        <a href="react-app/" onclick="closeMenu()">My Dashboard</a>
+        <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
+        <a href="#agents" onclick="closeMenu()">AI Agents</a>
+        <a href="#about" onclick="closeMenu()">About</a>
+
+        <button class="primary-btn" onclick="startPlanning()">
+            Plan a Trip
+        </button>
+    </div>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    <span>✦</span>
+                    AI-POWERED TRAVEL PLANNING
+                </div>
+
+                <h1>
+                    Plan less.
+                    <br>
+                    <span>Travel more.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Your AI team for planning the perfect trip.
+                    Multiple intelligent agents research destinations,
+                    hotels, activities, food and transport to create
+                    a personalized itinerary just for you.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button class="primary-btn hero-btn"
+                            onclick="startPlanning()">
+                        ✨ Plan My Trip
+                    </button>
+
+                    <button class="secondary-btn"
+                            onclick="scrollToSection('explore')">
+                        Explore Destinations
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+                <div class="trust-line">
+                    <span>✦</span>
+                    Personalized planning powered by AI
+                </div>
+
+            </div>
+
+
+            <!-- Floating trip card -->
+
+            <div class="floating-card trip-preview">
+
+                <div class="preview-top">
+                    <div>
+                        <small>YOUR NEXT ADVENTURE</small>
+                        <h3>Swiss Alps</h3>
+                    </div>
+
+                    <span class="status-dot"></span>
+                </div>
+
+                <div class="preview-info">
+
+                    <div>
+                        <span>📅</span>
+                        <p>7 Days</p>
+                    </div>
+
+                    <div>
+                        <span>👥</span>
+                        <p>2 Travelers</p>
+                    </div>
+
+                    <div>
+                        <span>💰</span>
+                        <p>₹85,000</p>
+                    </div>
+
+                </div>
+
+                <div class="preview-progress">
+                    <div class="progress-label">
+                        <span>AI Planning</span>
+                        <span>94%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= AI AGENTS ================= -->
+
+        <section class="agents-section" id="agents">
+
+            <div class="section-heading">
+
+                <div class="section-label">
+                    <span>✦</span>
+                    ONE TRIP. MULTIPLE AI AGENTS.
+                </div>
+
+                <h2>
+                    Every part of your journey,
+                    <span>handled intelligently.</span>
+                </h2>
+
+                <p>
+                    Specialized AI agents work together to research,
+                    compare and organize every part of your trip.
+                </p>
+
+            </div>
+
+
+            <div class="agents-grid">
+
+                <div class="agent-card">
+                    <div class="agent-icon">🗺️</div>
+                    <h3>Destination Agent</h3>
+                    <p>
+                        Discovers places and experiences that match
+                        your travel preferences.
+                    </p>
+                </div>
+
+                <div class="agent-card">
+                    <div class="agent-icon">🏨</div>
+                    <h3>Hotel Agent</h3>
+                    <p>
+                        Finds accommodation based on your budget,
+                        location and preferences.
+                    </p>
+                </div>
+
+                <div class="agent-card">
+                    <div class="agent-icon">🍜</div>
+                    <h3>Food Agent</h3>
+                    <p>
+                        Recommends restaurants and local food
+                        experiences worth discovering.
+                    </p>
+                </div>
+
+                <div class="agent-card">
+                    <div class="agent-icon">🎯</div>
+                    <h3>Activity Agent</h3>
+                    <p>
+                        Finds activities and attractions suited
+                        to your interests.
+                    </p>
+                </div>
+
+                <div class="agent-card">
+                    <div class="agent-icon">🚗</div>
+                    <h3>Transport Agent</h3>
+                    <p>
+                        Plans practical routes and transportation
+                        between destinations.
+                    </p>
+                </div>
+
+                <div class="agent-card">
+                    <div class="agent-icon">💰</div>
+                    <h3>Budget Agent</h3>
+                    <p>
+                        Estimates costs and keeps your complete
+                        journey within budget.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="how-section" id="how-it-works">
+
+            <div class="section-heading">
+
+                <div class="section-label">
+                    HOW IT WORKS
+                </div>
+
+                <h2>
+                    From idea to itinerary
+                    <span>in minutes.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">01</div>
+
+                    <div class="step-content">
+                        <h3>Tell us about your trip</h3>
+
+                        <p>
+                            Choose your destination, dates, budget,
+                            interests and travel preferences.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">02</div>
+
+                    <div class="step-content">
+                        <h3>AI agents collaborate</h3>
+
+                        <p>
+                            Specialized agents research destinations,
+                            stays, activities, food and transportation.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">03</div>
+
+                    <div class="step-content">
+                        <h3>Get your perfect itinerary</h3>
+
+                        <p>
+                            Receive a personalized day-by-day travel
+                            plan designed around your preferences.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DESTINATIONS ================= -->
+
+        <section class="destinations-section" id="explore">
+
+            <div class="section-heading destination-heading">
+
+                <div>
+                    <div class="section-label">
+                        EXPLORE
+                    </div>
+
+                    <h2>
+                        Where will you
+                        <span>go next?</span>
+                    </h2>
+                </div>
+
+                <a class="text-btn" href="explore.html">
+                    View all destinations →
+                </a>
+
+            </div>
+
+
+            <div class="destination-grid">
+
+                <div class="destination-card large">
+                    <div class="destination-image goa">
+                        <div class="destination-info">
+                            <small>INDIA</small>
+                            <h3>Goa</h3>
+                            <p>Beaches · Food · Adventure</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="destination-card">
+                    <div class="destination-image manali">
+                        <div class="destination-info">
+                            <small>INDIA</small>
+                            <h3>Manali</h3>
+                            <p>Mountains · Nature</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="destination-card">
+                    <div class="destination-image dubai">
+                        <div class="destination-info">
+                            <small>UAE</small>
+                            <h3>Dubai</h3>
+                            <p>Luxury · Adventure</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="destination-card">
+                    <div class="destination-image kashmir">
+                        <div class="destination-info">
+                            <small>INDIA</small>
+                            <h3>Kashmir</h3>
+                            <p>Nature · Culture</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CTA ================= -->
+
+        <section class="cta-section" id="about">
+
+            <div class="cta-content">
+
+                <div class="section-label">
+                    YOUR NEXT ADVENTURE AWAITS
+                </div>
+
+                <h2>
+                    Stop planning.
+                    <br>
+                    <span>Start exploring.</span>
+                </h2>
+
+                <p>
+                    Tell our AI where you want to go.
+                    We'll handle the rest.
+                </p>
+
+                <button class="primary-btn cta-btn"
+                        onclick="startPlanning()">
+                    ✨ Start Planning
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+
+                <div class="logo">
+                    <span class="logo-icon">✦</span>
+                    Safar
+                </div>
+
+                <p>
+                    Intelligent travel planning,
+                    powered by multiple AI agents.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+                    <h4>Product</h4>
+                    <a href="explore.html">Explore</a>
+                    <a href="#agents">AI Agents</a>
+                    <a href="#how-it-works">How It Works</a>
+                </div>
+
+                <div>
+                    <h4>Company</h4>
+                    <a href="#about">About</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>© 2026 Safar. All rights reserved.</p>
+
+            <p>Built for smarter journeys.</p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

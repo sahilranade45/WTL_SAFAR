@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAFAR — My Travel Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root">
+      <!-- Fallback shown only if accessed directly without running the Vite dev server -->
+      <div id="static-fallback" style="display:none; font-family: 'DM Sans', sans-serif; text-align: center; padding: 70px 24px; min-height: 100vh; background: #f8f8f3; color: #172c27;">
+        <p style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #668d36; text-transform: uppercase; margin-bottom: 12px;">SAFAR REACT APPLICATION</p>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 32px; margin-bottom: 14px;">My Travel Dashboard</h2>
+        <p style="color: #68756f; font-size: 15px; max-width: 520px; margin: 0 auto 26px; line-height: 1.6;">
+          This dashboard is a React application built with Vite. When running your project in local development, start the Vite development server in your terminal:
+        </p>
+        <div style="background: white; border: 1px solid #e9ebe5; border-radius: 9px; padding: 14px 22px; display: inline-block; font-family: monospace; font-size: 14px; color: #172c27; margin-bottom: 24px; box-shadow: 0 4px 14px rgba(0,0,0,0.04);">
+          cd react-app &amp;&amp; npm run dev
+        </div>
+        <div>
+          <a href="../index.html" style="display: inline-block; padding: 10px 20px; background: #172c27; color: white; border-radius: 7px; text-decoration: none; font-size: 13px; font-weight: 600;">
+            ← Return to Home Page
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      // If opened through a static server (e.g. Live Server on port 5500) where JSX isn't compiled:
+      // Try to detect an active Vite dev server or display the helpful fallback
+      setTimeout(() => {
+        const root = document.getElementById('root');
+        const fallback = document.getElementById('static-fallback');
+        // If React mounted, #static-fallback will have been replaced
+        if (fallback && root && root.contains(fallback)) {
+          // Check common Vite local ports
+          const testVitePorts = [5173, 5174, 5175];
+          let redirected = false;
+
+          const checkPort = (port) => {
+            if (redirected || window.location.port === String(port)) return;
+            fetch(`http://localhost:${port}/`, { mode: 'no-cors' })
+              .then(() => {
+                redirected = true;
+                window.location.href = `http://localhost:${port}/`;
+              })
+              .catch(() => {});
+          };
+
+          testVitePorts.forEach(checkPort);
+
+          // If not redirected within 400ms, display the fallback guide
+          setTimeout(() => {
+            if (!redirected && fallback) {
+              fallback.style.display = 'block';
+            }
+          }, 400);
+        }
+      }, 350);
+    </script>
+  </body>
+</html>

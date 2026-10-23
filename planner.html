@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Plan Your Trip — SAFAR</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="planner.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="planner-navbar">
+
+        <a href="index.html" class="logo">
+            <span class="logo-icon">✦</span>
+            SAFAR
+        </a>
+
+        <div class="planner-nav-right">
+            <span>AI Travel Planner</span>
+            <a href="index.html">← Back Home</a>
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="planner-page">
+
+        <!-- LEFT SIDE -->
+
+        <aside class="planner-sidebar">
+
+            <div class="sidebar-content">
+
+                <div class="sidebar-label">
+                    ✦ SAFAR AI
+                </div>
+
+                <h1>
+                    Let's plan your
+                    <span>perfect journey.</span>
+                </h1>
+
+                <p>
+                    Tell us what kind of trip you're looking for.
+                    Our AI agents will use your preferences to
+                    create a personalized travel plan.
+                </p>
+
+
+                <div class="agent-preview">
+
+                    <div class="agent-preview-header">
+                        <span>AI TEAM</span>
+                        <div class="online-dot"></div>
+                    </div>
+
+                    <div class="mini-agent">
+                        <span>🗺️</span>
+                        <div>
+                            <strong>Destination</strong>
+                            <small>Discovering places</small>
+                        </div>
+                    </div>
+
+                    <div class="mini-agent">
+                        <span>🏨</span>
+                        <div>
+                            <strong>Hotels</strong>
+                            <small>Finding stays</small>
+                        </div>
+                    </div>
+
+                    <div class="mini-agent">
+                        <span>🎯</span>
+                        <div>
+                            <strong>Activities</strong>
+                            <small>Finding experiences</small>
+                        </div>
+                    </div>
+
+                    <div class="mini-agent">
+                        <span>💰</span>
+                        <div>
+                            <strong>Budget</strong>
+                            <small>Optimizing costs</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- RIGHT SIDE -->
+
+        <section class="planner-content">
+
+            <!-- PROGRESS -->
+
+            <div class="progress-container">
+
+                <div class="progress-top">
+
+                    <span id="stepLabel">
+                        STEP 1 OF 5
+                    </span>
+
+                    <span id="progressPercent">
+                        20%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+                    <div id="progressFill"></div>
+                </div>
+
+            </div>
+
+
+            <!-- STEP 1 -->
+
+            <div class="planner-step active" data-step="1">
+
+                <div class="step-heading">
+
+                    <span class="step-icon">📍</span>
+
+                    <div>
+                        <h2>Where do you want to go?</h2>
+
+                        <p>
+                            Choose your destination or let SAFAR
+                            help you discover one.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <label class="input-label">
+                    Destination
+                </label>
+
+                <div class="search-box">
+
+                    <span>🔎</span>
+
+                    <input
+                        type="text"
+                        id="destination"
+                        placeholder="Search a city or country..."
+                    >
+
+                </div>
+
+
+                <p class="popular-label">
+                    Popular destinations
+                </p>
+
+
+                <div class="destination-options">
+
+                    <button class="destination-option"
+                            data-destination="Goa">
+
+                        <span class="destination-emoji">🏖️</span>
+
+                        <div>
+                            <strong>Goa</strong>
+                            <small>Beaches · India</small>
+                        </div>
+
+                    </button>
+
+
+                    <button class="destination-option"
+                            data-destination="Manali">
+
+                        <span class="destination-emoji">🏔️</span>
+
+                        <div>
+                            <strong>Manali</strong>
+                            <small>Mountains · India</small>
+                        </div>
+
+                    </button>
+
+
+                    <button class="destination-option"
+                            data-destination="Dubai">
+
+                        <span class="destination-emoji">🏙️</span>
+
+                        <div>
+                            <strong>Dubai</strong>
+                            <small>Luxury · UAE</small>
+                        </div>
+
+                    </button>
+
+
+                    <button class="destination-option"
+                            data-destination="Kashmir">
+
+                        <span class="destination-emoji">🌄</span>
+
+                        <div>
+                            <strong>Kashmir</strong>
+                            <small>Nature · India</small>
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="planner-step" data-step="2">
+
+                <div class="step-heading">
+
+                    <span class="step-icon">📅</span>
+
+                    <div>
+                        <h2>When are you travelling?</h2>
+
+                        <p>
+                            Choose your travel dates and group size.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="input-grid">
+
+                    <div class="input-group">
+
+                        <label>Start Date</label>
+
+                        <input
+                            type="date"
+                            id="startDate"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>End Date</label>
+
+                        <input
+                            type="date"
+                            id="endDate"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="traveller-box">
+
+                    <label>Travelers</label>
+
+                    <div class="counter-row">
+
+                        <div>
+                            <strong>Adults</strong>
+                            <small>Age 13+</small>
+                        </div>
+
+                        <div class="counter">
+
+                            <button onclick="changeCount('adults', -1)">
+                                −
+                            </button>
+
+                            <span id="adults">2</span>
+
+                            <button onclick="changeCount('adults', 1)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="counter-row">
+
+                        <div>
+                            <strong>Children</strong>
+                            <small>Age 2–12</small>
+                        </div>
+
+                        <div class="counter">
+
+                            <button onclick="changeCount('children', -1)">
+                                −
+                            </button>
+
+                            <span id="children">0</span>
+
+                            <button onclick="changeCount('children', 1)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="planner-step" data-step="3">
+
+                <div class="step-heading">
+
+                    <span class="step-icon">💰</span>
+
+                    <div>
+                        <h2>What's your budget?</h2>
+
+                        <p>
+                            Give us a rough idea so our agents can
+                            optimize your trip.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <label class="input-label">
+                    Total trip budget
+                </label>
+
+                <div class="budget-input">
+
+                    <span>₹</span>
+
+                    <input
+                        type="number"
+                        id="budget"
+                        placeholder="30,000"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <p class="popular-label">
+                    Choose a budget style
+                </p>
+
+
+                <div class="budget-options">
+
+                    <button class="budget-option"
+                            data-budget="Budget">
+
+                        <span>🎒</span>
+
+                        <div>
+                            <strong>Budget</strong>
+                            <small>Smart & affordable</small>
+                        </div>
+
+                    </button>
+
+
+                    <button class="budget-option selected"
+                            data-budget="Moderate">
+
+                        <span>✨</span>
+
+                        <div>
+                            <strong>Moderate</strong>
+                            <small>Comfortable & balanced</small>
+                        </div>
+
+                    </button>
+
+
+                    <button class="budget-option"
+                            data-budget="Luxury">
+
+                        <span>💎</span>
+
+                        <div>
+                            <strong>Luxury</strong>
+                            <small>Premium experience</small>
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 4 -->
+
+            <div class="planner-step" data-step="4">
+
+                <div class="step-heading">
+
+                    <span class="step-icon">❤️</span>
+
+                    <div>
+                        <h2>What do you love?</h2>
+
+                        <p>
+                            Select everything you'd enjoy during
+                            your trip.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="interest-grid">
+
+                    <button class="interest-card">
+                        <span>🏖️</span>
+                        Beaches
+                    </button>
+
+                    <button class="interest-card">
+                        <span>🏔️</span>
+                        Mountains
+                    </button>
+
+                    <button class="interest-card">
+                        <span>🍜</span>
+                        Food
+                    </button>
+
+                    <button class="interest-card">
+                        <span>🏛️</span>
+                        History
+                    </button>
+
+                    <button class="interest-card">
+                        <span>🏕️</span>
+                        Adventure
+                    </button>
+
+                    <button class="interest-card">
+                        <span>🌿</span>
+                        Nature
+                    </button>
+
+                    <button class="interest-card">
+                        <span>🛍️</span>
+                        Shopping
+                    </button>
+
+                    <button class="interest-card">
+                        <span>🎭</span>
+                        Culture
+                    </button>
+
+                    <button class="interest-card">
+                        <span>🌃</span>
+                        Nightlife
+                    </button>
+
+                    <button class="interest-card">
+                        <span>📸</span>
+                        Photography
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 5 -->
+
+            <div class="planner-step" data-step="5">
+
+                <div class="step-heading">
+
+                    <span class="step-icon">⚙️</span>
+
+                    <div>
+                        <h2>Customize your experience</h2>
+
+                        <p>
+                            A few final preferences before SAFAR
+                            creates your itinerary.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="preference-group">
+
+                    <label>Accommodation</label>
+
+                    <div class="choice-row">
+
+                        <button class="choice active">
+                            🏨 Hotel
+                        </button>
+
+                        <button class="choice">
+                            🏠 Homestay
+                        </button>
+
+                        <button class="choice">
+                            🛏️ Hostel
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="preference-group">
+
+                    <label>Transportation</label>
+
+                    <div class="choice-row">
+
+                        <button class="choice active">
+                            🚗 Mixed
+                        </button>
+
+                        <button class="choice">
+                            🚆 Public
+                        </button>
+
+                        <button class="choice">
+                            🚕 Private
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="preference-group">
+
+                    <label>Travel pace</label>
+
+                    <div class="choice-row">
+
+                        <button class="choice">
+                            🧘 Relaxed
+                        </button>
+
+                        <button class="choice active">
+                            ⚖️ Balanced
+                        </button>
+
+                        <button class="choice">
+                            ⚡ Packed
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ready-box">
+
+                    <span>✦</span>
+
+                    <div>
+                        <strong>
+                            Your AI team is ready.
+                        </strong>
+
+                        <p>
+                            SAFAR will combine your preferences
+                            to build your personalized trip.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <div class="planner-navigation">
+
+                <button
+                    class="back-btn"
+                    id="backBtn"
+                    onclick="previousStep()"
+                >
+                    ← Back
+                </button>
+
+
+                <button
+                    class="next-btn"
+                    id="nextBtn"
+                    onclick="nextStep()"
+                >
+                    Continue →
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="planner.js"></script>
+
+</body>
+</html>

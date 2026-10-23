@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Destinations | SAFAR</title>
+    <link rel="stylesheet" href="explore.css">
+    <script src="explore.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="logo">SAFAR<span>.</span></a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="explore.html" class="active">Explore</a>
+        <a href="planner.html">Plan a Trip</a>
+    </nav>
+
+    <a href="planner.html" class="nav-button">Start Planning ↗</a>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">YOUR NEXT STORY STARTS HERE</p>
+            <h1>The world is big.<br><span>Your journey awaits.</span></h1>
+            <p class="hero-description">
+                From quiet mountain escapes to vibrant cities,
+                discover places worth travelling for.
+            </p>
+
+            <form class="search-box" id="searchForm">
+                <span>⌕</span>
+                <input
+                    type="search"
+                    id="destinationSearch"
+                    placeholder="Search destinations, states..."
+                    aria-label="Search destinations"
+                >
+                <button id="searchButton" type="submit">Explore</button>
+            </form>
+
+            <p class="hero-note">✦ Discover India, one journey at a time</p>
+        </div>
+    </section>
+
+    <section class="destinations-section">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">FIND YOUR ESCAPE</p>
+                <h2>Places you'll <span>love.</span></h2>
+                <p>Choose a vibe. We'll help you find the destination.</p>
+            </div>
+            <span id="resultCount" class="result-count"></span>
+        </div>
+
+        <div class="filters" id="categoryFilters">
+            <button class="filter active" data-category="All">All places</button>
+            <button class="filter" data-category="Mountains">🏔 Mountains</button>
+            <button class="filter" data-category="Beaches">🏖 Beaches</button>
+            <button class="filter" data-category="Culture">🏛 Culture</button>
+            <button class="filter" data-category="Nature">🌿 Nature</button>
+        </div>
+
+        <div class="destination-grid" id="destinationGrid"></div>
+
+        <div class="empty-state" id="emptyState" hidden>
+            <h3>No destinations found</h3>
+            <p>Try another search or select a different category.</p>
+            <button id="resetFilters">Show all destinations</button>
+        </div>
+    </section>
+
+    <section class="planner-banner">
+        <div>
+            <p class="eyebrow">YOUR TRIP, YOUR WAY</p>
+            <h2>Found your place?</h2>
+            <p>Let's turn that idea into a journey worth remembering.</p>
+        </div>
+        <a href="planner.html" class="banner-button">Plan my trip ↗</a>
+    </section>
+</main>
+
+<footer class="footer">
+    <a href="index.html" class="logo">SAFAR<span>.</span></a>
+    <p>Less scrolling. More exploring.</p>
+    <p>© 2026 SAFAR · Made for curious travellers.</p>
+</footer>
+
+</body>
+</html>

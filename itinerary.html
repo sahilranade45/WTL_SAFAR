@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your personalised AI-generated travel itinerary from SAFAR — day-by-day plans, activities, budget estimates and more.">
+    <title>Your Itinerary | SAFAR</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="itinerary.css">
+</head>
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <a href="index.html" class="logo">SAFAR<span>.</span></a>
+
+        <nav aria-label="Main Navigation">
+            <a href="index.html">Home</a>
+            <a href="explore.html">Explore</a>
+            <a href="planner.html">Plan a Trip</a>
+            <a href="pages/inspiration.html">Inspiration</a>
+        </nav>
+
+        <a href="planner.html" class="nav-button">Plan Another Trip ↗</a>
+    </header>
+
+
+    <!-- ================= LOADING OVERLAY ================= -->
+    <div class="loading-overlay" id="loadingOverlay" role="status" aria-label="Generating your itinerary">
+        <div class="loading-card">
+            <div class="loading-spinner"></div>
+            <p class="loading-title">Building your journey…</p>
+            <div class="agent-activity" id="agentActivity">
+                <div class="agent-line active" id="agentLine1">🗺️ Destination Agent — researching places</div>
+                <div class="agent-line" id="agentLine2">🏨 Hotel Agent — finding stays</div>
+                <div class="agent-line" id="agentLine3">🎯 Activity Agent — curating experiences</div>
+                <div class="agent-line" id="agentLine4">💰 Budget Agent — estimating costs</div>
+            </div>
+            <p class="loading-note">Sample itinerary preview — AI integration coming soon</p>
+        </div>
+    </div>
+
+
+    <!-- ================= EMPTY STATE (shown when no trip data) ================= -->
+    <main id="emptyState" class="empty-page" hidden>
+        <div class="empty-content">
+            <div class="empty-icon">🧭</div>
+            <h1>No trip data found</h1>
+            <p>It looks like you arrived here directly. Complete the five-step planner first and your personalised itinerary will appear here.</p>
+            <a href="planner.html" class="primary-btn">← Start Planning a Trip</a>
+        </div>
+    </main>
+
+
+    <!-- ================= ITINERARY PAGE (hidden until data is loaded) ================= -->
+    <main id="itineraryMain" hidden>
+
+        <!-- ================= HERO ================= -->
+        <section class="itinerary-hero" id="itineraryHero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <a href="planner.html" class="back-link">← Edit preferences</a>
+                <p class="eyebrow" id="heroEyebrow">YOUR PERSONALISED ITINERARY</p>
+                <h1 id="heroTitle">Your journey, thoughtfully planned.</h1>
+                <p class="hero-meta" id="heroMeta"></p>
+            </div>
+        </section>
+
+
+        <!-- ================= PREVIEW BANNER ================= -->
+        <div class="preview-banner">
+            <span>✦</span>
+            <p><strong>Sample itinerary preview</strong> — AI-powered personalisation coming soon. Activities and prices are illustrative, not verified.</p>
+        </div>
+
+
+        <!-- ================= TRIP OVERVIEW ================= -->
+        <section class="section overview-section">
+            <div class="section-heading">
+                <p class="eyebrow">TRIP SUMMARY</p>
+                <h2>Your <span>adventure at a glance.</span></h2>
+            </div>
+
+            <div class="overview-grid" id="overviewGrid">
+                <!-- Rendered by itinerary.js -->
+            </div>
+        </section>
+
+
+        <!-- ================= DAY-BY-DAY ITINERARY ================= -->
+        <section class="section days-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">DAY-BY-DAY PLAN</p>
+                    <h2>Every moment, <span>mapped out.</span></h2>
+                    <p>A curated schedule based on your destination and preferences.</p>
+                </div>
+            </div>
+
+            <div class="days-grid" id="daysGrid">
+                <!-- Rendered by itinerary.js -->
+            </div>
+        </section>
+
+
+        <!-- ================= RECOMMENDED EXPERIENCES ================= -->
+        <section class="section experiences-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">MUST-DO EXPERIENCES</p>
+                    <h2>Highlights worth <span>savouring.</span></h2>
+                    <p>Top picks curated for your destination.</p>
+                </div>
+            </div>
+
+            <div class="experiences-grid" id="experiencesGrid">
+                <!-- Rendered by itinerary.js -->
+            </div>
+        </section>
+
+
+        <!-- ================= BUDGET BREAKDOWN ================= -->
+        <section class="section budget-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">BUDGET ESTIMATE</p>
+                    <h2>Where your money <span>goes.</span></h2>
+                    <p>Illustrative breakdown — actual costs will vary based on your choices.</p>
+                </div>
+            </div>
+
+            <div class="budget-layout">
+
+                <div class="budget-bars" id="budgetBars">
+                    <!-- Rendered by itinerary.js -->
+                </div>
+
+                <div class="budget-total-card" id="budgetTotalCard">
+                    <!-- Rendered by itinerary.js -->
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= ACTIONS ================= -->
+        <section class="actions-banner">
+            <div class="actions-content">
+                <p class="eyebrow">WHAT'S NEXT?</p>
+                <h2>Ready to make this <span>real?</span></h2>
+                <p>Share your itinerary, explore more destinations, or start a new trip plan.</p>
+            </div>
+
+            <div class="actions-buttons">
+                <button class="action-btn primary" onclick="window.print()">
+                    🖨️ Save as PDF
+                </button>
+                <a href="planner.html" class="action-btn secondary">
+                    ✦ Plan Another Trip
+                </a>
+                <a href="explore.html" class="action-btn ghost">
+                    Explore Destinations →
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <a href="index.html" class="logo">SAFAR<span>.</span></a>
+        <p>Less scrolling. More exploring.</p>
+        <p>© 2026 SAFAR · AI Travel Planner.</p>
+    </footer>
+
+
+    <script src="itinerary.js"></script>
+
+</body>
+</html>
