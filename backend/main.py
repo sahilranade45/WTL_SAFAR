@@ -12,6 +12,7 @@ Then open http://localhost:8000
 
 import json
 import os
+import time
 from datetime import date
 from typing import List
 
@@ -108,28 +109,35 @@ def generate_itinerary(trip: ItineraryRequest):
     if days > MAX_DAYS:
         raise HTTPException(400, f"Trips can be at most {MAX_DAYS} days long.")
 
-    # 3. Ask Gemini
-    try:
-        client = genai.Client(
-            api_key=GEMINI_API_KEY,
-            http_options=genai_types.HttpOptions(timeout=90_000),  # give up after 90 seconds
-        )
-        response = client.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=build_prompt(trip, days),
-            config=genai_types.GenerateContentConfig(
-                response_mime_type="application/json",  # ask for JSON only
-                max_output_tokens=8192,
-            ),
-        )
-    except genai_errors.APIError as err:
-        # Gemini answered with an error: print Google's message in this terminal
-        # and send the browser a short explanation of what really happened
-        print(f"Gemini error {err.code} {err.status}: {err.message}")
-        raise HTTPException(502, explain_gemini_error(err))
-    except Exception:
-        # No internet, timeout, etc.
-        raise HTTPException(502, "Could not reach Gemini. Check your internet connection.")
+    # 3. Ask Gemini (if Google says "busy" we wait 3 seconds and try again, up to 3 times)
+    client = genai.Client(
+        api_key=GEMINI_API_KEY,
+        http_options=genai_types.HttpOptions(timeout=90_000),  # give up after 90 seconds
+    )
+    response = None
+    for attempt in range(3):
+        try:
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=build_prompt(trip, days),
+                config=genai_types.GenerateContentConfig(
+                    response_mime_type="application/json",  # ask for JSON only
+                    max_output_tokens=8192,
+                ),
+            )
+            break  # it worked, stop trying
+        except genai_errors.APIError as err:
+            # 429 / 500 / 503 / 504 mean "busy", so try again. Anything else (bad key, bad model) will not fix itself.
+            if err.code in (429, 500, 503, 504) and attempt < 2:
+                print(f"Gemini busy (error {err.code}), trying again...")
+                time.sleep(3)
+                continue
+            # Print Google's message in this terminal and send the browser a short explanation
+            print(f"Gemini error {err.code} {err.status}: {err.message}")
+            raise HTTPException(502, explain_gemini_error(err))
+        except Exception:
+            # No internet, timeout, etc.
+            raise HTTPException(502, "Could not reach Gemini. Check your internet connection.")
 
     # 4. Turn Gemini's text into a Python dictionary
     try:
