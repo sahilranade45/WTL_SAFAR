@@ -203,6 +203,11 @@ h1, h2, h3 {
 
 /* =============== EMPTY STATE =============== */
 
+/* The hidden attribute must win over display:flex on .empty-page */
+[hidden] {
+    display: none !important;
+}
+
 .empty-page {
     min-height: calc(100vh - 76px);
     display: flex;
