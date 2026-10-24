@@ -56,12 +56,12 @@ log = logging.getLogger("safar")
 GEMINI_API_KEY: str | None = os.getenv("GEMINI_API_KEY")
 
 # Allow the model name to be overridden via .env; fall back to a safe default.
-# gemini-2.0-flash was retired by Google; gemini-3.8-flash is the current stable default.
-GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
+# gemini-3.5-flash-lite answers fast and has its own free quota.
+GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
 
 # GEMINI_FALLBACK_MODEL: tried automatically if the primary model returns 503/504.
 # Set to empty string to disable fallback.
-GEMINI_FALLBACK_MODEL: str = os.getenv("GEMINI_FALLBACK_MODEL", "gemini-2.5-flash")
+GEMINI_FALLBACK_MODEL: str = os.getenv("GEMINI_FALLBACK_MODEL", "gemini-3.5-flash")
 
 # GEMINI_MAX_RETRIES: how many times to retry a transient error (503, 504, 429)
 GEMINI_MAX_RETRIES: int = int(os.getenv("GEMINI_MAX_RETRIES", "3"))
@@ -229,6 +229,7 @@ Important rules:
 2. Include one entry in daily_plans for every day from {req.start_date} to {req.end_date}.
 3. Tailor suggestions to the {req.budget} budget and {req.pace} pace.
 4. All cost estimates should be realistic for {req.destination}.
+5. Give every cost in Indian Rupees (INR) and set "currency" to "INR".
 """.strip()
 
 

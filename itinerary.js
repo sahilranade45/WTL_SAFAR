@@ -4,10 +4,84 @@
    renders a destination-appropriate day-by-day itinerary,
    experience highlights, and budget breakdown.
 
-   No live AI API is connected. All content is
-   generated from local template data.
-   A note on the page makes this clear to users.
+   Content comes from Gemini through the backend
+   (backend/main.py). If the backend is down, it
+   falls back to the local template data.
    ================================================ */
+
+/* ================================================
+   AI ITINERARY (Gemini via the FastAPI backend)
+   If the backend is not running or Gemini fails,
+   fetchAiItinerary returns null and the page falls
+   back to the local template data below.
+   ================================================ */
+
+const API_URL = 'http://localhost:8000/api/generate-itinerary';
+
+async function fetchAiItinerary(trip) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 90000); // give up after 90 seconds
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal: controller.signal,
+            body: JSON.stringify({
+                destination:   trip.destination,
+                start_date:    trip.startDate,
+                end_date:      trip.endDate,
+                travelers:     (parseInt(trip.adults) || 2) + (parseInt(trip.children) || 0),
+                budget:        trip.budgetStyle || 'Moderate',
+                interests:     trip.interests || [],
+                accommodation: trip.accommodation || 'Hotel',
+                transport:     trip.transport || 'Mixed',
+                pace:          trip.pace || 'Balanced'
+            })
+        });
+        if (!response.ok) return null;
+        const data = await response.json();
+        return data.itinerary || null;
+    } catch (err) {
+        console.warn('SAFAR: AI itinerary not available, using templates.', err);
+        return null;
+    } finally {
+        clearTimeout(timer);
+    }
+}
+
+// Turns one time slot from Gemini ({activity, location, notes}) into the {title, desc} the page shows
+function toSlot(slot) {
+    slot = slot || {};
+    return {
+        title: slot.activity || 'Free time',
+        desc: [slot.location, slot.notes].filter(Boolean).join(' - ')
+    };
+}
+
+// Turns Gemini's JSON into the same shape as DESTINATION_DATA, so the render functions need no changes
+function aiToDestData(ai) {
+    const overview = ai.trip_overview || {};
+    const days = (ai.daily_plans || []).map(d => ({
+        title: d.title,
+        morning: toSlot(d.morning),
+        afternoon: toSlot(d.afternoon),
+        evening: toSlot(d.evening)
+    }));
+    const stays = (ai.accommodation_suggestions || []).map(a => ({
+        icon: '🏨', category: a.type || 'Stay',
+        title: a.name, desc: [a.area, a.price_per_night, a.highlights].filter(Boolean).join(' - ')
+    }));
+    const tips = (ai.travel_tips || []).slice(0, 3).map(t => ({
+        icon: '💡', category: 'Travel tip', title: 'Good to know', desc: t
+    }));
+    return {
+        label: overview.destination,
+        days: days,
+        experiences: stays.concat(tips),
+        budgetKeys: { accommodation: 0.35, food: 0.25, transport: 0.20, activities: 0.20 }
+    };
+}
+
 
 /* ================================================
    DESTINATION DATA
@@ -773,18 +847,35 @@ function init() {
         numDays = Math.min(destData.days.length, 5);
     }
 
-    // Run the loading animation, then reveal the page
-    runLoadingAnimation(() => {
+    // Ask Gemini in the background while the loading animation plays
+    const aiPromise = fetchAiItinerary(trip);
+
+    // Run the loading animation, wait for Gemini, then reveal the page
+    runLoadingAnimation(async () => {
         clearTimeout(safetyTimer);
+        const ai = await aiPromise;
+
+        // Use Gemini's plan if we got one, otherwise the local template
+        let shownData = destData;
+        if (ai && ai.daily_plans && ai.daily_plans.length > 0) {
+            shownData = aiToDestData(ai);
+            const cost = ai.estimated_total_cost;
+            if (!trip.budget && cost && cost.min && cost.max) {
+                trip.budget = Math.round((cost.min + cost.max) / 2);
+            }
+            document.querySelector('.preview-banner p').textContent =
+                'Itinerary written by Google Gemini AI. Prices are estimates, please verify before booking.';
+        }
+
         overlay.classList.add('hidden');
         mainPage.hidden = false;
 
         try {
-            renderHero(trip, destData);
+            renderHero(trip, shownData);
             renderOverview(trip, numDays);
-            renderDays(destData, trip, numDays);
-            renderExperiences(destData);
-            renderBudget(trip, numDays, destData);
+            renderDays(shownData, trip, numDays);
+            renderExperiences(shownData);
+            renderBudget(trip, numDays, shownData);
         } catch (err) {
             console.error('SAFAR: Error rendering itinerary', err);
         }
