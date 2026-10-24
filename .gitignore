@@ -27,3 +27,6 @@ dist/
 
 # Any .env file anywhere (extra safety)
 .env
+
+SIMPLIFY-PROMPT.md
+*.pdf
